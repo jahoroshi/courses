@@ -24,20 +24,39 @@ def draw_matrix(rows, cols, data):
         print(' '.join(row))
 
 
+def log_status_cpu(func):
+    def cpu_usage():
+        with open("/home/jahoroshi4y/Документы/Courses/courses/tms/hw_16_02/log_cpu_usage.txt", "a+") as log:
+           log.write(f'{time.strftime("%Y-%m-%d %H:%M:%S")},{",".join(map(str, func()))}\n')
+                      
+    return cpu_usage
+
+@log_status_cpu
+def stack_data():
+    global data
+    current_status = psutil.cpu_percent(interval=1, percpu=True)
+    data = data[::-1]
+    data.append(f'{time.strftime("%Y-%m-%d %H:%M:%S")},{",".join(map(str, current_status))}')
+    data = data[::-1]
+    data.pop() 
+    return current_status
+
 rows = 40
 cols = 16
 start_time = time.time()
+current_time = time.strftime('%Y-%m-%d %H:%M:%S')
+
 
 
 scale_color = [
-    '\033[32;1m█\033[0m',  # Green font
-    '\033[33;1m█\033[0m',  # Yellow font
-    '\033[34;1m█\033[0m',  # Blue font
-    '\033[35;1m█\033[0m',  # Purple font
-    '\033[36;1m█\033[0m',  # Cyan font
-    '\033[37;1m█\033[0m',  # White font
-    '\033[91;1m█\033[0m',  # Light red font
-    '\033[93;1m█\033[0m'   # Light yellow font
+    '\033[32;1m█\033[0m',  
+    '\033[33;1m█\033[0m',  
+    '\033[34;1m█\033[0m',  
+    '\033[35;1m█\033[0m',  
+    '\033[36;1m█\033[0m',  
+    '\033[37;1m█\033[0m',  
+    '\033[91;1m█\033[0m',  
+    '\033[93;1m█\033[0m'   
 ]
 data = [
     "2024-02-19 16:34:48,10.0,28.0,21.4,29.0,24.2,24.5,25.0,24.2",
@@ -49,6 +68,7 @@ data = [
 
 
 
+
 while True:
     clean_screen()
     print("\033[33;40;1m%-10s%61s\033[0m" % (" CPU Usage Monitor", f'Run time: {str(int(time.time() - start_time))} sec '))
@@ -57,7 +77,4 @@ while True:
     print("\033[33;40;1m  %-10s%-10s%-10s%-10s%-10s%-10s%-10s%-7s\033[0m" % ("CPU 1", "CPU 2", "CPU 3", "CPU 4", "CPU 5", "CPU 6", "CPU 7", "CPU 8"))
 
     time.sleep(1)
-    data = data[::-1]
-    data.append(f'2024-02-19 16:34:56,{",".join(map(str, psutil.cpu_percent(interval=1, percpu=True)))}')
-    data = data[::-1]
-    data.pop()  
+    stack_data()
