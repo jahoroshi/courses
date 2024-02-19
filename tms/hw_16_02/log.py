@@ -1,15 +1,18 @@
+import os, time, psutil
+
+def clean_screen():
+    if psutil.POSIX:
+        os.system('clear')
+    else:
+        os.system('cls')
+        
 def draw_matrix(rows, cols, data):
-    matrix = [['.' for _ in range(rows)] for _ in range(cols)]
+    matrix = [['\033[33m.\033[0m' for _ in range(rows)] for _ in range(cols)]
     c = 0
     for k in range(8):
         for i in range(5):
             val = int(float(data[i][k+1]))
-            height = int(val**0.6)
-            # if val > 50:
-            #     height = val // 10
-            # else:
-            #     height = val // 2
-                        
+            height = int(val**0.6)     
             for j in range(cols - 1, cols - 1 - height, -1):
                 if j >= 0:
                     matrix[j][i+c] = scale_color[k]
@@ -17,11 +20,14 @@ def draw_matrix(rows, cols, data):
                     
  
     for row in matrix:
+
         print(' '.join(row))
 
-# Пример использования:
+
 rows = 40
 cols = 16
+start_time = time.time()
+
 
 scale_color = [
     '\033[32;1m█\033[0m',  # Green font
@@ -41,5 +47,17 @@ data = [
     "2024-02-19 16:34:56,19.6,22.5,19.4,68.7,19.2,42.0,24.0,32.0",
 ]
 
-draw_matrix(rows, cols, [row.split(',') for row in data])
 
+
+while True:
+    clean_screen()
+    print("\033[33;40;1m%-10s%61s\033[0m" % (" CPU Usage Monitor", f'Run time: {str(int(time.time() - start_time))} sec '))
+    
+    draw_matrix(rows, cols, [row.split(',') for row in data])
+    print("\033[33;40;1m  %-10s%-10s%-10s%-10s%-10s%-10s%-10s%-7s\033[0m" % ("CPU 1", "CPU 2", "CPU 3", "CPU 4", "CPU 5", "CPU 6", "CPU 7", "CPU 8"))
+
+    time.sleep(1)
+    data = data[::-1]
+    data.append(f'2024-02-19 16:34:56,{",".join(map(str, psutil.cpu_percent(interval=1, percpu=True)))}')
+    data = data[::-1]
+    data.pop()  
