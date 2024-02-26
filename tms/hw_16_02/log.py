@@ -28,7 +28,9 @@ def log_status_cpu(func):
     def cpu_usage():
         with open("/home/jahoroshi4y/Документы/Courses/courses/tms/hw_16_02/log_cpu_usage.txt", "a+") as log:
            log.write(f'{time.strftime("%Y-%m-%d %H:%M:%S")},{",".join(map(str, func()))}\n')
-                      
+           
+        return # Что тут должно быть в return? 
+                        
     return cpu_usage
 
 @log_status_cpu
