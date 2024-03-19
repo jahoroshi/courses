@@ -1,11 +1,19 @@
-from requests_html import HTMLSession
-import json
+# import asyncio
 
-url = "https://fineproxy.org/wp-content/themes/fineproxyorg/proxy-list.php?0.20522686081524832"
-session = HTMLSession(browser_args=["--no-sandbox", "--user-agent='Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 YaBrowser/20.9.3.136 Yowser/2.5 Safari/537.36'"])
+# async def main():
+#     print('Hello')
+#     await asyncio.sleep(1)
+#     print('World')
 
-headers = {
-    'Referer': 'https://fineproxy.org/'
-}
+# asyncio.run(main())
 
-response = session.get(url, headers=headers)
+
+# import os
+
+# print(os.path.dirname(__file__))
+
+# "https://advanced.name/ru/freeproxy?page={}".format("2")
+
+import random
+for i in range(1, 300, 64):
+    print(i)

@@ -15,7 +15,7 @@ response = session.get(url, headers=headers)
 
 # results теперь содержит все вхождения слова "usage" на странице
 # print(response.text)
-# with open("1.json", "w") as file: json.dump(response.json(), file)
+# with open("1.html", "w") as file: file.write(res)
 
 json_data = response.json()
 
