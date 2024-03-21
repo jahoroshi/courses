@@ -1,4 +1,8 @@
-from requests_html import HTMLSession, HTMLResponse, HTML
+from requests_html import HTMLSession, HTML
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from urllib.parse import urlsplit
+import time
 import re
 import csv
 import os
@@ -14,10 +18,13 @@ class Parser(ABC):
         self.proxies = None
         for key, value in kwargs.items():
             setattr(self, key, value)
+            
         self.session = HTMLSession(browser_args=["--no-sandbox", "--user-agent='Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 YaBrowser/20.9.3.136 Yowser/2.5 Safari/537.36'", "--ignore-certificate-errors", "--headless"])
         self.report = []
+        split_url = urlsplit(self.url)
         self.file_path = os.path.dirname(__file__) + "/data/"
-        self.site_name = f'{self.url.split("://")[1].split("/")[0].replace(".", "_")}'
+        self.base_url = f"{split_url.scheme}://{split_url.netloc}"
+        self.site_name = f'{split_url.netloc.replace(".", "_")}' 
 
         
     
@@ -31,18 +38,22 @@ class Parser(ABC):
         self.response.html.render(wait=random.uniform(2, 4), scrolldown=scrolldown)
      
         
-    def save_response(self, num=""):
+    def save_response(self, data, num=""):
         with open(f'{self.file_path}{self.site_name}_{num}.html', "w") as file:
-            file.write(self.response.html.html)
+            file.write(data)
             
             
     def save_csv(self, file_name, data):
         with open(f'{self.file_path}{file_name}.csv', "a", newline='') as file:
             writer = csv.writer(file)
-            writer.writerows([[i] for i in data])    
+            writer.writerows([[i] for i in data])
+            
+    def save_json(self, data):
+        with open(f'{self.file_path}{self.site_name}.json', "w") as file:
+            json.dump(data, file, indent=4, ensure_ascii=False)    
             
     @abstractmethod
-    def parce(self):
+    def parse(self):
         pass
     
     @abstractmethod
@@ -63,7 +74,7 @@ class ProxyParserHTML(Parser):
         ip = re.search(self.IP_PATTERN, text)
         return ip.group(0) if ip else False   
         
-    def parce(self):
+    def parse(self):
         self.proxy_types = {'http': [], 'https': [], 'socks4': [], 'socks5': []}
         tbodys = self.response.html.find("tbody")
         tbody = [i for i in tbodys if self.is_ip(i.text)][-1]
@@ -94,7 +105,7 @@ class ProxyParserHTML(Parser):
             for i in range(1, int(self.pages)):
                 self.get_data()
                 if self.is_ip(self.response.html.text):
-                    self.parce()
+                    self.parse()
                     print(f'Страница {i} объкта {self.site_name.upper()} обработана успешно.')
                     print(*self.report)
                 else:
@@ -116,7 +127,7 @@ class ProxyParserAPI(ProxyParserHTML):
         super(ProxyParserHTML, self).get_data()
 
         
-    def parce(self):
+    def parse(self):
         self.proxy_types = {'http': [], 'https': [], 'socks4': [], 'socks5': []}
 
         for el in self.response.json():
@@ -135,7 +146,67 @@ class ProxyParserAPI(ProxyParserHTML):
         for file_name, prox in self.proxy_types.items():
             self.save_csv(file_name, prox)                                
         
-                
+
+
+class WildberriesParser(Parser):
+    
+    
+    def get_data(self, num=1):
+        url = self.url.format(num)
+        # chrome_options = Options()
+        # prefs = {"profile.managed_default_content_settings.images": 2}
+        # chrome_options.add_argument("--headless")
+        # chrome_options.add_experimental_option("prefs", prefs)
+        # driver = webdriver.Chrome(options=chrome_options)
+        # driver.get(url)
+        # time.sleep(4)
+        # self.response = HTML(html=driver.page_source)
+        with open("/home/jahoroshi4y/Документы/Courses/page.html") as file:
+            html = file.read()
+        self.response = HTML(html=html)
+
+            
+        
+ 
+
+    def parse(self):
+        self.result = []
+        product_card = self.response.find("#route-content .catalog__content .product-snippet")
+        try:
+            for card in product_card:
+                product_list = {}
+                product_list["brand"] = card.find(".product-card__brand")[0].text.strip()
+                product_list["name"] = card.find(".product-card__name")[0].text.strip()
+                product_list["price"] = card.find(".product-card__price .price__lower")[0].text.strip()
+                product_list["link"] = f'{self.base_url}{card.find(".product-card__link")[0].attrs["href"]}'
+                product_list["image"] = card.find("img")[0].attrs['src']
+                self.result.append(product_list)
+        except IndexError as e:
+            print(e)
+        self.save_json(self.result)
+
+    
+    def __call__(self):
+        self.get_data()
+        # self.save_response()
+        self.parse()
+    
+    
+    
+# kf = KufarParser({'url': 'https://www.wildberries.by/catalog?search=%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0&tail-location=SNT&page=2'})
+# kf()
+tasks = [{'url': 'https://www.wildberries.by/catalog?search=%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0&tail-location=SNT&page=2'}]
+
+for url in tasks:
+    obj = WildberriesParser(**url)
+    obj()
+    
+    
+    
+    
+    
+    
+                    
 
 # ps1 = ProxyParserHTML("https://hidemy.io/en/proxy-list/")
 # ps1()                    
@@ -150,8 +221,8 @@ class ProxyParserAPI(ProxyParserHTML):
 #     obj()
     
     
-tasks = [{'url': "https://fineproxy.org/wp-content/themes/fineproxyorg/proxy-list.php?0.20522686081524832", 'headers': {'Referer': 'https://fineproxy.org/'}}]
+# tasks = [{'url': "https://fineproxy.org/wp-content/themes/fineproxyorg/proxy-list.php?0.20522686081524832", 'headers': {'Referer': 'https://fineproxy.org/'}}]
 
-for url in tasks:
-    obj = ProxyParserAPI(**url)
-    obj()
+# for url in tasks:
+#     obj = ProxyParserAPI(**url)
+#     obj()

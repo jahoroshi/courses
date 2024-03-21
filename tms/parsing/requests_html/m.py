@@ -1,34 +1,34 @@
-from requests_html import HTMLSession
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+
+# Создайте экземпляр веб-драйвера (например, Chrome)
+driver = webdriver.Chrome()
+
+try:
+    # Откройте страницу по URL
+    driver.get("https://www.wildberries.by/catalog?search=%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D0%B0&tail-location=SNT&page=2")
+    time.sleep(20)
 
 
-# url = "https://fineproxy.org/wp-content/themes/fineproxyorg/proxy-list.php?0.20522686081524832"
-# session = HTMLSession(browser_args=["--no-sandbox", "--user-agent='Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 YaBrowser/20.9.3.136 Yowser/2.5 Safari/537.36'"])
+    # Дождитесь, пока элемент с id="my-element" станет видимым
+    wait = WebDriverWait(driver, 25.2)
+    driver.set_script_timeout(30)
+    driver.set_page_load_timeout(30)
+    element = wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
-# headers = {
-#     'Referer': 'https://fineproxy.org/'
-# }
+    # Получите HTML-код всей страницы
+    page_source = driver.page_source
 
-# response = session.get(url, headers=headers)
+    # # Получите текст элемента
+    result_text = element.text
 
-# IP_PATTERN = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
-# PORT_PATTERN = r'\b(?<![.])[0-9]{2,5}(?![.])'
-response = [{"host":"172.67.229.15","ip":"172.67.229.15","port":"80","lastseen":14578,"delay":200,"cid":"6252001","country_code":"US","country_name":"United States","city":"","checks_up":"1592","checks_down":"2","anon":"1","http":"1","ssl":"0","socks4":"0","socks5":"0"},{"host":"198.71.49.163","ip":"198.71.49.163","port":"3128","lastseen":14578,"delay":2100,"cid":"6252001","country_code":"US","country_name":"United States","city":"","checks_up":"14","checks_down":"428","anon":"1","http":"1","ssl":"0","socks4":"0","socks5":"0"}]
-proxy_types = {'http': [], 'https': [], 'socks4': [], 'socks5': []}
+    # Сохраните результат в файл
+    with open("result.html", "w") as file:
+        file.write(result_text)
 
-        
-for el in response:
-    if el['http'] == '1':
-        proxy_types['http'].append(f"{el['ip']}:{el['port']}")
-        
-    if el.get('https') and el['https'] == '1':
-        proxy_types['https'].append(f"{el['ip']}:{el['port']}")
-        
-    if el['socks4'] == '1':
-        proxy_types['http'].append(f"{el['ip']}:{el['port']}")
-        
-    if el['socks5'] == '1':
-        proxy_types['http'].append(f"{el['ip']}:{el['port']}")
-
-print(proxy_types)
-
-
+finally:
+    # Закройте веб-драйвер
+    driver.quit()
