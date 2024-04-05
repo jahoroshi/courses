@@ -1,0 +1,218 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #007765;
+}
+
+
+.container {
+    max-width: 1219px;
+    margin: 0 auto;
+    padding: 0 55px;
+
+}
+
+
+.header>.container {
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+
+.navigation a:not(:last-child)::after {
+    content: "|";
+    margin: 0 10px;
+
+
+}
+
+.navigation a {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    line-height: 28.13px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.logo {
+    width: 184px;
+    height: 45px;
+
+
+}
+
+.header_image {
+    width: 100%;
+    background-image: url('/courses/stepik/html/images/bgheader.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 403px;
+    padding-top: 84px;
+}
+
+.header_text {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 72px;
+    line-height: 84.38px;
+    text-align: center;
+    color: #FFFFFF;
+
+
+}
+
+.text_section {
+    width: 100%;
+    background: #EEEEEE;
+    padding-top: 48px;
+    padding-bottom: 55px;
+
+}
+
+.section_title {
+    font-size: 64px;
+    line-height: 75px;
+    text-align: center;
+    color: #007765;
+    padding-bottom: 25px;
+}
+
+.section_content {
+    font-size: 32px;
+    line-height: 37.5px;
+    text-align: left;
+    /* padding-top: 15px; */
+
+
+}
+
+.background_image_blue {
+    background-image: url('/courses/stepik/html/images/bg_image_blue.png');
+    background-size: cover;
+    background-position: center center;
+    padding: 128px 0;
+}
+
+.bg-img-bl-txt {
+    font-size: 48px;
+    font-style: italic;
+    line-height: 56.25px;
+    text-align: center;
+    font-weight: 500;
+
+    color: #FFFFFF;
+
+
+}
+
+.logo-ppc {
+    width: 115px;
+    height: 115px;
+
+}
+
+.img-txt {
+    font-size: 32px;
+    line-height: 37.5px;
+    text-align: left;
+
+}
+
+
+.section_title+.container {
+    padding: 0;
+    padding-bottom: 30px;
+    gap: 40px;
+    display: flex;
+}
+
+
+.background_image_blue+.text_section {
+    background: #FFFFFF;
+}
+
+.team-box {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+   
+}
+
+.personal-box {
+    padding: 20px;
+    margin-bottom: 45px;
+    width: 30%;
+    flex-basis: 33%;
+
+}
+
+.photo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 168px;
+    padding-bottom: 15px;
+
+}
+
+.member-name {
+    font-size: 24px;
+    line-height: 28.13px;
+    text-align: center;
+    color: #007765;
+    font-weight: bold;
+
+}
+
+
+.member-status {
+    font-size: 18px;
+    font-style: italic;
+    line-height: 21.09px;
+    text-align: center;
+
+}
+
+.container .section_title {
+    padding-bottom: 35px;
+}
+
+.footer {
+    width: 100%;
+    height: 176px;
+    background: #333333;
+}
+
+.footer-txt {
+    font-size: 18px;
+    line-height: 21.09px;
+    text-align: center;
+    height: 64px;
+    color: #FFFFFF;
+    width: 540px;
+
+}
+
+.txt-position {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
