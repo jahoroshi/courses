@@ -1,0 +1,18 @@
+/* .navbar {
+    background: #0000 !important;
+} */
+.phones-decor {
+    text-decoration: underline;
+    text-decoration-color: #fbdc0c;
+    text-decoration-thickness: 2px;
+
+}
+
+.navbar-nav {
+    --bs-nav-link-color: rgb(255, 255, 255) !important;
+}
+
+#social-media-nav {
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
