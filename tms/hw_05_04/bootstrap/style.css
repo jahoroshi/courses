@@ -16,3 +16,86 @@
     margin-bottom: 0px;
     margin-top: 10px;
 }
+
+:root {
+    --black1: #000000;
+
+}
+
+header, footer, section {
+    padding: 70px 0;
+}
+
+header {
+    padding: 20vh 0;
+    background: url(images/Cover.jpg);
+    background-size:cover;
+    background-position-y: center;
+    background-position-x: center;
+    height: 95vh;
+}
+
+footer {
+    background-color: #191919;
+}
+.btn-dark {
+    --bs-btn-bg: #000000;
+}
+[data-bs-theme=dark]{
+
+--bs-body-bg: #000000;
+}
+
+.bg-body-tertiary {
+    --bs-bg-opacity: 1;
+    background-color: #000000!important;
+}
+
+.navbar {
+
+    --bs-navbar-toggler-border-color: none;
+    --bs-navbar-toggler-border-radius: none;
+    --bs-navbar-toggler-focus-width: none;
+    --bs-navbar-toggler-transition: none;
+  
+}
+
+.img-thumbnail {
+    border: none;
+    border-radius: none;
+}
+
+.about-learning {
+   
+        border-width: 1px;
+        border-radius: 24px;
+        background-color: #f4f5f7;
+        background-position: center center;
+        border-color: #e7ebef;
+        border-style: solid;
+        box-shadow: 0px 0px 10px 0px rgba(89,88,88,0);
+        
+    }
+
+    .girl-photo {
+        background-color: #ffc107;
+        border-width: 1px;
+        border-radius: 24px;
+        background-position: center center;
+        border-color: #e7ebef;
+        border-style: solid;
+        box-shadow: 0px 0px 10px 0px rgba(89,88,88,0);
+    }
+
+    .btn {
+        --bs-btn-padding-x: 0.95rem;
+        --bs-btn-padding-y: 0.575rem;
+    }
+
+
+    .online-courses {
+        padding-top: 5px;
+    }
+   
+
+    
