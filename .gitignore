@@ -163,3 +163,4 @@ django1/
 notes1/
 stepik1/
 .git/
+.gitignore
