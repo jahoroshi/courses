@@ -159,7 +159,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-django/
-notes/
-stepik/
-.git
+django1/
+notes1/
+stepik1/
+.git/
