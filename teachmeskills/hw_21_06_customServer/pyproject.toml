@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "chttp"
+version = "0.1.0"
+description = "Custom HTTP server"
+authors = ["Dima"]
+license = "MIT"
+readme = "README.md"
+packages = [{include="chttp", from="src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+aiofiles = "^23.2.1"
+marshmallow = "^3.21.3"
+pydantic = "^2.7.4"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+flake8-pyproject = "^1.2.3"
+jupyter = "^1.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+target-version = ['py312']
+include = '\.pyi?$'
+skip_magic_trailing_comma = true
+
+
+[tool.flake8]
+exclude = ['tests', 'venv', '.venv', 'tmp_*.py']
+ignore = ['W503', 'E203', 'C901']
+max-complexity = 10
+max-line-length = 120
