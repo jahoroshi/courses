@@ -77,8 +77,11 @@ jobs:
         with:
           context: teachmeskills/hw_24_07_docker/djangoProject
           file: teachmeskills/hw_24_07_docker/djangoProject/Dockerfile
-          push: true
-          tags: ghcr.io/${{ secrets.GHCR_USERNAME }}/my-image-name:latest
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
 
       # Sign the resulting Docker image digest except on PRs.
