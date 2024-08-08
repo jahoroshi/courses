@@ -4,15 +4,7 @@ from typing import Optional, List
 from sqlalchemy import String, Boolean, DateTime, ForeignKey, Table, Column
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.database.db import Base
-
-
-class TaskORM(Base):
-    __tablename__ = 'tasks'
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str]
-    description: Mapped[str | None]
+from database import Base
 
 
 user_event_association = Table(
@@ -35,7 +27,7 @@ class User(Base):
 
     events: Mapped[Optional[List['Event']]] = relationship('Event',
                                                            secondary=user_event_association,
-                                                           back_populates='users', lazy='select')
+                                                           back_populates='users', lazy='selectin')
 
 
 class Event(Base):
@@ -43,8 +35,10 @@ class Event(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(50), unique=True)
+    name2: Mapped[str] = mapped_column(String(50), unique=True)
     meeting_time: Mapped[datetime] = mapped_column(DateTime)
     description: Mapped[str | None] = mapped_column(String(150))
     users: Mapped[Optional[List['User']]] = relationship('User',
                                                          secondary=user_event_association,
-                                                         back_populates='events', lazy='select')
+                                                         back_populates='events', lazy='selectin')
+
