@@ -17,7 +17,7 @@ async def lifespan(app: FastAPI):
     :param app: FastAPI application instance
     """
     # Uncomment the next line if you want to delete tables before creating them
-    await delete_tables()
+    # await delete_tables()
 
     # Create all tables in the database
     await create_tables()
@@ -36,3 +36,5 @@ app.include_router(event_router, prefix='/api/v1')
 
 # Include the user router with a prefix
 app.include_router(user_router, prefix='/api/v1')
+
+

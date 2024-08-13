@@ -20,7 +20,6 @@ if config.config_file_name is not None:
 from models import Base
 #
 target_metadata = Base.metadata
-print('11111', Base.metadata)
 # target_metadata = None
 
 

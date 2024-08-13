@@ -1,9 +1,12 @@
 from datetime import datetime
 from typing import List
+
 from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from models import Event
+
+from models import Event, Notification
+
 
 class EventRepository:
     """
@@ -60,3 +63,42 @@ class EventRepository:
         session.add(event)
         await session.flush()
         await session.commit()
+
+    async def create_or_update_notification(self, notification: Notification, event: Event, user_id: int,
+                                            session: AsyncSession) -> Notification:
+        """
+        Create or update a notification for a user and event.
+
+        If a notification for the given event and user already exists, update it with the new details.
+        Otherwise, create a new notification.
+
+        :param notification: Notification instance to create or update
+        :param event: Event instance associated with the notification
+        :param user_id: ID of the user associated with the notification
+        :param session: Database session
+        :return: The updated or newly created notification
+        """
+
+        # Query to find existing notification for the user and event
+        query = select(Notification).where(
+            (Notification.event_id == event.id) & (Notification.user_id == user_id))
+        result = await session.execute(query)
+        existing_notif = result.scalar_one_or_none()
+
+        if existing_notif:
+            # Update the existing notification with new details
+            existing_notif.first_notif_id = notification.first_notif_id
+            existing_notif.second_notif_id = notification.second_notif_id
+            existing_notif.first_notification = notification.first_notification
+            existing_notif.second_notification = notification.second_notification
+        else:
+            # Add the new notification to the session
+            session.add(notification)
+
+        # Save changes to the database
+        await session.flush()
+        await session.commit()
+
+        # Return the updated or newly created notification
+        return existing_notif or notification
+

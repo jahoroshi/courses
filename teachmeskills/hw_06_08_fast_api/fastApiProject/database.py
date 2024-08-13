@@ -23,8 +23,6 @@ async def create_tables():
     This function uses the metadata from the Base class.
     """
     async with engine.begin() as conn:
-        a = Base.metadata
-        print(a)
         await conn.run_sync(Base.metadata.create_all)
 
 async def delete_tables():
