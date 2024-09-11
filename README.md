@@ -1,60 +1,151 @@
-# TeachMeSkills Training Repository  🌟
+# TeachMeSkills Training Repository 🌟
 
-This repository serves as the hub for my educational projects as part of the TeachMeSkills courses. Here, I share mini-projects that I create while applying and developing my programming skills.
+**This repository serves as the hub for my training projects within the TeachMeSkills courses. Here, I share mini-projects that I develop to apply and improve my programming skills.**
 
-## Projects
+## Technologies and Libraries Used
 
-### Computer System Monitoring with Graphical Display
+### 🛠️ Main Technologies
 
-**Graphical Display Features:**
+- **Python** 🐍
+- **FastAPI** ⚡
+- **Django 3.x** 🌐
+- **PostgreSQL** 🗄️
+- **SQLAlchemy** 🛢️
+- **Alembic** 🔄
+- **Celery** 📨
+- **Redis** 🧠
+- **Docker** 🐳
+- **Docker Compose** ⚙️
+- **JWT (JSON Web Tokens)** 🔐
+- **Passlib** 🔑
+- **Poetry** 📦
+- **psycopg2** 🧩
 
-- **Innovative Approach**: The system state is graphically displayed in the form of a vertical equalizer, dynamically reflecting CPU load.
-- **Visual Indication**: The vertical indication consists of a series of columns that change their height according to the current CPU load, creating a "pulsating" effect of the system.
-- **No External Modules**: The equalizer is implemented without the use of external graphical libraries, demonstrating a deep understanding of programming and algorithmic skills.
-- **Algorithmic Foundation**: The display is based on an algorithm that uses a matrix as a field for data visualization. This allows information to be displayed directly in the terminal using symbols to create colored blocks.
-- **Real-Time Data**: The system updates the data every five seconds, ensuring current and accurate representation of the processor's state.
-- **Equalizer Transition**: Fresh load indicators are added to the beginning of the stack, and the last indicator is removed, creating a continuous data flow effect.
-- **Work Demonstration**: The repository includes a video that visually demonstrates the program's operation.
+### 📚 Libraries
 
-### Universal Proxy Server Parser
+- **socket**, **threading**, **sys** — libraries for implementing client-server communication 🔗.
+- **requests**, **urllib3**, **requests_html**, **selenium** — libraries for handling HTTP requests, web scraping, and proxy interaction 🌐.
+- **openai** — integration with OpenAI API for AI-based functionalities 🤖.
+- **csv**, **json**, **os**, **re** — libraries for working with files, regular expressions, and system operations 📂.
+- **concurrent.futures.ThreadPoolExecutor** — for parallel task execution and multithreading 🛠️.
+- **psutil** — a library to retrieve system resource information (CPU, memory, etc.) 💻.
+- **json** — a library for handling JSON data, serialization, and deserialization 🗃️.
+- **time** — used for handling time intervals and measuring execution time ⏲️.
 
-**Features:**
+### 📐 Programming Patterns
 
-- **Universality**: The parser is capable of collecting and sorting proxy addresses from a multitude of open sources, providing users with an extensive collection of available proxies.
-- **Automation**: Automated data collection simplifies the process of searching and selecting working proxy servers, saving time and resources.
-- **html-requests Module**: The program is written using the html-requests module, ensuring high speed and accuracy of parsing.
-- **Bypassing Protection**: The parser effectively operates even with marketplaces' catalogs that have parsing protection, demonstrating flexibility and advanced data collection techniques.
-- **Work Demonstration**: The repository features a video that clearly demonstrates the program's operation.
+- **Abstract classes** — implemented using the `abc` module for creating class structure 🏛️.
+- **Message handlers** — used in client-server architecture to process incoming and outgoing requests ✉️.
+- **Retry logic** — implemented via the `Retry` mechanism to improve the reliability of interactions with external services 🔄.
+
+---
+
+# 🚀 TMS-FastAPI
+
+**Goal**: Development of a web application for managing events and users, with support for authentication, authorization, and notifications.
+
+---
+
+# 🧠 GPT Client-Server Chat Architecture
+
+**Goal**: Implementation of a client-server chat using GPT-3.5 to generate responses. The focus is on asynchronous communication and multithreading.
+
+---
+
+# 🖥️ System Monitoring in Python
+
+**Goal**: Development of a console application to monitor system resources (CPU, memory, disks) with real-time dynamic output.
+
+---
+
+# 🕸️ Proxy Scraper Project
+
+**Goal**: Creation of a scraper to gather proxy server data from websites and APIs. Automation of page rendering with JavaScript to fetch data.
+
+---
+
+# 🐳 Django Docker Training Project
+
+**Goal**: Practicing containerization of Django applications using Docker and Docker Compose. The project includes working with PostgreSQL and configuring a multi-component environment.
+
+---
+
+*...and many more.*
 
 
 
 
+# TeachMeSkills Training Repository на русском🌟
 
-# TeachMeSkills Training Repository Russian  🌟
+**Этот репозиторий является центром моих учебных проектов в рамках курсов 
+TeachMeSkills. Здесь я делюсь мини-проектами, которые создаю, применяя и 
+развивая свои навыки программирования.** 
 
-Этот репозиторий является центром моих учебных проектов в рамках курсов TeachMeSkills. Здесь я делюсь мини-проектами, которые создаю, применяя и развивая свои навыки программирования.
+## Используемые технологии и библиотеки
 
-## Проекты
+### 🛠️ Основные технологии
 
-### Мониторинг Системы Компьютера с Графическим Отображением
+- **Python** 🐍
+- **FastAPI** ⚡
+- **Django 3.x** 🌐
+- **PostgreSQL** 🗄️
+- **SQLAlchemy** 🛢️
+- **Alembic** 🔄
+- **Celery** 📨
+- **Redis** 🧠
+- **Docker** 🐳
+- **Docker Compose** ⚙️
+- **JWT (JSON Web Tokens)** 🔐
+- **Passlib** 🔑
+- **Poetry** 📦
+- **psycopg2** 🧩
 
-**Особенности Графического Отображения:**
+### 📚 Библиотеки
 
-- **Инновационный Подход**: Графическое отображение состояния системы выполнено в форме вертикального эквалайзера, который динамично отражает загруженность процессора.
-- **Визуальная Индикация**: Вертикальная индикация представляет собой серию столбцов, которые изменяют свою высоту в соответствии с текущей загрузкой CPU, создавая эффект "пульсации" системы.
-- **Без Сторонних Модулей**: Реализация эквалайзера достигнута без использования сторонних графических библиотек, что демонстрирует глубокое понимание программирования и алгоритмических навыков.
-- **Алгоритмическая Основа**: Отображение основано на алгоритме, который использует матрицу в качестве поля для визуализации данных. Это позволяет отображать информацию непосредственно в терминале, используя символы для создания цветных блоков.
-- **Реальное Время**: Система обновляет данные каждые пять секунд, обеспечивая актуальное и точное отображение состояния процессора.
-- **Переходность Эквалайзера**: Свежие показатели загруженности добавляются в начало стека, а последний показатель удаляется, создавая эффект непрерывного потока данных.
-- **Демонстрация Работы**: В репозитории представлено видео, которое наглядно демонстрирует процесс работы программы.
+- **socket**, **threading**, **sys** — библиотеки для реализации клиент-серверного взаимодействия 🔗.
+- **requests**, **urllib3**, **requests_html**, **selenium** — библиотеки для работы с HTTP-запросами, парсинга веб-страниц и взаимодействия с прокси-серверами 🌐.
+- **openai** — интеграция с OpenAI API для реализации функций на базе искусственного интеллекта 🤖.
+- **csv**, **json**, **os**, **re** — библиотеки для работы с файлами, регулярными выражениями и операциями на уровне системы 📂.
+- **concurrent.futures.ThreadPoolExecutor** — для параллельного выполнения задач и многопоточной обработки 🛠️.
+- **psutil** — библиотека для получения данных о системных ресурсах (использование CPU, памяти и т.д.) 💻.
+- **json** — библиотека для работы с данными в формате JSON, их сериализации и десериализации 🗃️.
+- **time** — используется для работы с временными интервалами и измерения времени выполнения ⏲️.
 
-### Универсальный Парсер Прокси Серверов
+### 📐 Паттерны программирования
 
-**Особенности:**
+- **Абстрактные классы** — реализованы с использованием модуля `abc` для построения общей структуры классов 🏛️.
+- **Обработчики сообщений** — применяются в клиент-серверной архитектуре для обработки входящих и исходящих запросов ✉️.
+- **Повторные попытки выполнения запросов** — реализованы через механизм `Retry` для повышения надежности приложения при взаимодействии с внешними сервисами 🔄.
 
-- **Универсальность**: Парсер способен собирать и отсортировывать прокси адреса из множества открытых источников, предоставляя пользователям обширную коллекцию доступных прокси.
-- **Автоматизация**: Автоматический сбор данных упрощает процесс поиска и выбора рабочих прокси серверов, экономя время и ресурсы.
-- **Модуль html-requests**: Программа написана с использованием модуля html-requests, что обеспечивает высокую скорость и точность парсинга.
-- **Обход Защиты**: Парсер эффективно работает даже с каталогами маркетплейсов, имеющими защиту от парсинга, демонстрируя гибкость и продвинутые техники сбора данных.
-- **Демонстрация Работы**: В репозитории представлено видео, которое наглядно демонстрирует процесс работы программы.
 
+# 🚀 TMS-FastAPI
+
+**Цель**: Разработка веб-приложения для управления событиями и пользователями с поддержкой аутентификации, авторизации и отправки уведомлений.
+
+---
+
+# 🧠 GPT-Чат Клиент-Серверная Архитектура
+
+**Цель**: Реализация клиент-серверного чата с использованием GPT-3.5 для генерации ответов. Основной упор сделан на асинхронное взаимодействие и многопоточность.
+
+---
+
+# 🖥️ Мониторинг системы на Python
+
+**Цель**: Разработка консольного приложения для мониторинга системных ресурсов (CPU, память, диски) с динамическим выводом в реальном времени.
+
+---
+
+# 🕸️ Проект Парсера Прокси
+
+**Цель**: Создание парсера для сбора данных о прокси-серверах с веб-сайтов и API. Автоматизация рендеринга страниц с JavaScript для получения данных.
+
+---
+
+# 🐳 Django Docker Учебный проект
+
+**Цель**: Практика контейнеризации Django-приложений с использованием Docker и Docker Compose. Проект включает работу с PostgreSQL и настройку многокомпонентной среды.
+
+---
+
+*...и многие другие.*
