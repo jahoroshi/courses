@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "aiogram bot test task"
+version = "0.1.0"
+description = ""
+authors = ["jahoroshi4y <jahoroshi4y@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+aiogram = "^3.13.0"
+python-dotenv = "^1.0.1"
+gunicorn = "^23.0.0"
+uvicorn = "^0.30.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
