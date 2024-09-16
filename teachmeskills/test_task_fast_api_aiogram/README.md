@@ -40,11 +40,13 @@
 
 - FastAPI
 - SQLAlchemy
-- PostgreSQL/MySQL
+- PostgreSQL
 - JWT
 - Docker
 - aiogram
 - Jinja2
+- Redis
+- fastapi_limiter
 
 ## 🚀 Инструкции по запуску
 
