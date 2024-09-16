@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: project1
+      POSTGRES_USER: project1
+      POSTGRES_PASSWORD: 123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+      
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  web:
+    build: 
+      context: ./fast_api_server
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8000"
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--reload"]
+    volumes:
+      - ./fast_api_server:/app
+
+    depends_on:
+      - db
+      - redis
+    networks:
+      - app-network
+
+  bot:
+    build:
+      context: ./aiogram_bot
+      dockerfile: Dockerfile
+    volumes:
+      - ./aiogram_bot:/app
+    ports:
+      - "8002:8001"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+

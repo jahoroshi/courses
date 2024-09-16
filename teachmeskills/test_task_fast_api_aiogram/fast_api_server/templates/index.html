@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Список заметок{% endblock %}
+
+{% block content %}
+    <h2>Список заметок</h2>
+    <ul>
+        {% for note in notes %}
+            <li>
+                <a href="{{ url_for('read_note_web', note_id=note.id) }}">{{ note.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

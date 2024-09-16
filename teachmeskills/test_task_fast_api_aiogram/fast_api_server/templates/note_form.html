@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Создать заметку{% endblock %}
+
+{% block content %}
+    <h2>Создать новую заметку</h2>
+    <form action="{{ url_for('create_note_web') }}" method="post">
+        <label for="title">Заголовок:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+        <label for="content">Содержимое:</label><br>
+        <textarea id="content" name="content" required></textarea><br><br>
+        <label for="tags">Теги (через запятую):</label><br>
+        <input type="text" id="tags" name="tags"><br><br>
+        <button type="submit">Создать</button>
+    </form>
+{% endblock %}
