@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Справочник погрузчиков</title>
+    <link rel="stylesheet" href="static/me/css/styles.css">
+
+</head>
+<body>
+<div class="container">
+    <h1>Справочник погрузчиков</h1>
+    <form method="get" action="/">
+        <input type="text-num" name="search" placeholder="Номер погрузчика" value="{{ search }}">
+        <button type="submit">Искать</button>
+        <a href="/" class="reset-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red">
+                <path d="M12 10.586l4.95-4.95 1.414 1.414L13.414 12l4.95 4.95-1.414 1.414L12 13.414l-4.95 4.95-1.414-1.414L10.586 12l-4.95-4.95L7.05 5.636z"/>
+            </svg>
+            Сбросить фильтр
+        </a>
+    </form>
+
+    <div style="display: flex; gap: 20px;">
+        <div class="sidebar">
+            <div class="button-group">
+                <button type="button" onclick="addForklift()" id="addButton">Добавить</button>
+                <button type="button" onclick="editForklift()" id="editButton" disabled>Изменить</button>
+                <button type="button" onclick="deleteForklift()" id="deleteButton" disabled>Удалить</button>
+                <button type="button" onclick="saveForklift()" id="saveButton" disabled>Сохранить</button>
+                <button type="button" onclick="cancelEdit()" id="cancelButton" disabled>Отменить</button>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Код записи</th>
+                        <th>Марка</th>
+                        <th>Номер</th>
+                        <th>Грузоподъемность</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for forklift in forklifts %}
+                    <tr data-forklift-id="{{ forklift.id }}" id="forkliftRow_{{ forklift.id }}"
+                        onclick="selectForklift(event, {{ forklift.id }})">
+                        <td>{{ forklift.id }}</td>
+                        <td>{{ forklift.brand }}</td>
+                        <td>{{ forklift.number }}</td>
+                        <td>{{ forklift.capacity }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>Простои по погрузчику <span id="selectedForkliftNumber"></span></h2>
+
+            <div class="button-group-right">
+                <button type="button" onclick="addDowntime()" id="addDowntimeButton" disabled>Добавить</button>
+                <button type="button" onclick="editDowntime()" id="editDowntimeButton" disabled>Изменить</button>
+                <button type="button" onclick="deleteDowntime()" id="deleteDowntimeButton" disabled>Удалить</button>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Начало</th>
+                        <th>Окончание</th>
+                        <th>Причина</th>
+                        <th>Время простоя</th>
+                    </tr>
+                    </thead>
+                    <tbody id="downtimesBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="downtimeModal" class="modal">
+    <div class="modal-content" style="background-color: #f0f0f0;">
+        <span class="close" onclick="closeDowntimeModal()">&times;</span>
+        <h2 id="downtimeModalTitle" style="text-align: center;">Проблемы с погрузчиком? Опишите</h2>
+        <form id="downtimeForm">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                <label for="downtimeStart" style="flex: 1;">Начало простоя (обязательное):</label>
+                <input type="datetime-local" id="downtimeStart" style="flex: 2;" required>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                <label for="downtimeEnd" style="flex: 1;">Окончание простоя:</label>
+                <input type="datetime-local" id="downtimeEnd" style="flex: 2;">
+            </div>
+            <div style="display: flex; flex-direction: column; margin-bottom: 15px;">
+                <label for="downtimeReason">Описание инцидента:</label>
+                <textarea id="downtimeReason" style="width: 100%; height: 100px;"></textarea>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 10px;">
+                <button type="button" onclick="saveDowntime()"
+                        style="padding: 10px 20px; background-color: #b30000; color: #fff; border: none; border-radius: 15px; cursor: pointer;">
+                    Сохранить
+                </button>
+                <button type="button" onclick="closeDowntimeModal()"
+                        style="padding: 10px 20px; background-color: #ccc; color: #333; border: none; border-radius: 15px; cursor: pointer;">
+                    Выход
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <p>Не сохранять внесенные изменения? Вы уверены?</p>
+        <button type="button" onclick="confirmCancel()">ДА</button>
+        <button type="button" onclick="closeConfirmModal()">НЕТ</button>
+    </div>
+</div>
+
+<script src="static/me/js/scripts.js"></script>
+</body>
+</html>

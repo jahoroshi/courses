@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "poetry install"
+version = "0.1.0"
+description = ""
+authors = ["jahoroshi4y <jahoroshi4y@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.0"
+uvicorn = "^0.30.6"
+sqlalchemy = "^2.0.35"
+pydantic = {extras = ["dotenv"], version = "^2.9.2"}
+psycopg2-binary = "^2.9.9"
+jinja2 = "^3.1.4"
+python-multipart = "^0.0.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
