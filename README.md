@@ -1,6 +1,6 @@
-# TeachMeSkills Training Repository 🌟
+# Training Repository 🌟
 
-**This repository serves as the hub for my training projects within the TeachMeSkills courses. Here, I share mini-projects that I develop to apply and improve my programming skills.**
+**This repository serves as the hub for my training projects. Here, I share mini-projects that I develop to apply and improve my programming skills.**
 
 ## Technologies and Libraries Used
 
@@ -75,10 +75,9 @@
 
 #
 #
-# TeachMeSkills Training Repository на русском🌟
+# Training Repository на русском🌟
 
-**Этот репозиторий является центром моих учебных проектов в рамках курсов 
-TeachMeSkills. Здесь я делюсь мини-проектами, которые создаю, применяя и 
+**Этот репозиторий является центром моих учебных проектов. Здесь я делюсь мини-проектами, которые создаю, применяя и 
 развивая свои навыки программирования.** 
 
 ## Используемые технологии и библиотеки
